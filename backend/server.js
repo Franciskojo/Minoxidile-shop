@@ -39,7 +39,11 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.NODE_ENV === 'production' ? 'https://minoxidile-shop.vercel.app' : 'http://localhost:5173',
+        origin: [
+            process.env.FRONTEND_URL,
+            'https://minoxidile-shop.vercel.app',
+            'http://localhost:5173'
+        ].filter(Boolean),
         credentials: true,
     },
 });
@@ -48,9 +52,11 @@ chatSocket(io);
 
 // Middleware
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? 'https://minoxidile-shop.vercel.app'
-        : 'http://localhost:5173',
+    origin: [
+        process.env.FRONTEND_URL,
+        'https://minoxidile-shop.vercel.app',
+        'http://localhost:5173'
+    ].filter(Boolean),
     credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));

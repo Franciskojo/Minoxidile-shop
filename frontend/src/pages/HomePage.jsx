@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import heroImg from '../assets/hero.png';
 import { useGetFeaturedProductsQuery, useGetTopRatedQuery } from '../store/slices/productsApiSlice.js';
 import { useGetCategoriesQuery } from '../store/slices/categoriesApiSlice.js';
 import ProductCard from '../components/ProductCard.jsx';
@@ -70,7 +71,7 @@ export default function HomePage() {
                     <div className="hero-image-wrapper animate-float">
                         <div className="image-glow" />
                         <img 
-                            src="/src/assets/hero.png" 
+                            src={heroImg} 
                             alt="Premium Grooming Products" 
                             className="hero-main-image"
                         />
