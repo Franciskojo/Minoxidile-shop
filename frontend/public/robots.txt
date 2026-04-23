@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Directories
+Disallow: /admin/
+Disallow: /vendor/
+Disallow: /account/
+Disallow: /login
+Disallow: /register
+Disallow: /checkout
+Disallow: /cart
+
+# Host
+Host: https://minoxidileshop.com
+
+# Sitemaps 
+Sitemap: https://minoxidileshop.com/sitemap.xml
