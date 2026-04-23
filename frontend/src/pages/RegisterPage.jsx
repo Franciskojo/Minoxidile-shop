@@ -54,6 +54,8 @@ export default function RegisterPage() {
                             <FiUser style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                             <input
                                 type="text"
+                                id="name"
+                                name="name"
                                 className="form-control"
                                 style={{ paddingLeft: '2.5rem' }}
                                 placeholder="John Doe"
@@ -65,11 +67,13 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Email Address</label>
+                        <label className="form-label" htmlFor="email">Email Address</label>
                         <div style={{ position: 'relative' }}>
                             <FiMail style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                             <input
                                 type="email"
+                                id="email"
+                                name="email"
                                 className="form-control"
                                 style={{ paddingLeft: '2.5rem' }}
                                 placeholder="email@example.com"
@@ -81,11 +85,13 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Password</label>
+                        <label className="form-label" htmlFor="password">Password</label>
                         <div style={{ position: 'relative' }}>
                             <FiLock style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                             <input
                                 type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                name="password"
                                 className="form-control"
                                 style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
                                 placeholder="••••••••"
@@ -109,11 +115,13 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Confirm Password</label>
+                        <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
                         <div style={{ position: 'relative' }}>
                             <FiLock style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                             <input
                                 type={showPassword ? 'text' : 'password'}
+                                id="confirmPassword"
+                                name="confirmPassword"
                                 className="form-control"
                                 style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
                                 placeholder="••••••••"

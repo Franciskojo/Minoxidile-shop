@@ -60,24 +60,24 @@ export default function ProfilePage() {
 
                         <form onSubmit={handleProfileSubmit}>
                             <div className="form-group">
-                                <label className="form-label">Full Name</label>
+                                <label className="form-label" htmlFor="profile-name">Full Name</label>
                                 <div style={{ position: 'relative' }}>
                                     <FiUser style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                                    <input className="form-control" style={{ paddingLeft: '2.5rem' }} value={name} onChange={(e) => setName(e.target.value)} required />
+                                    <input id="profile-name" name="name" className="form-control" style={{ paddingLeft: '2.5rem' }} value={name} onChange={(e) => setName(e.target.value)} required />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Email Address</label>
+                                <label className="form-label" htmlFor="profile-email">Email Address</label>
                                 <div style={{ position: 'relative' }}>
                                     <FiMail style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                                    <input className="form-control" style={{ paddingLeft: '2.5rem' }} value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                    <input id="profile-email" name="email" className="form-control" style={{ paddingLeft: '2.5rem' }} value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Phone Number</label>
+                                <label className="form-label" htmlFor="profile-phone">Phone Number</label>
                                 <div style={{ position: 'relative' }}>
                                     <FiPhone style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                                    <input className="form-control" style={{ paddingLeft: '2.5rem' }} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 234 567 890" />
+                                    <input id="profile-phone" name="phone" className="form-control" style={{ paddingLeft: '2.5rem' }} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 234 567 890" />
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary profile-btn" disabled={isUpdatingProfile} style={{ marginTop: '1rem' }}>
@@ -95,10 +95,12 @@ export default function ProfilePage() {
 
                         <form onSubmit={handlePasswordSubmit}>
                             <div className="form-group">
-                                <label className="form-label">Current Password</label>
+                                <label className="form-label" htmlFor="currentPassword">Current Password</label>
                                 <div style={{ position: 'relative' }}>
                                     <FiLock style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                                     <input
+                                        id="currentPassword"
+                                        name="currentPassword"
                                         className="form-control"
                                         type={showPassword ? 'text' : 'password'}
                                         style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
@@ -120,10 +122,12 @@ export default function ProfilePage() {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="form-label">New Password</label>
+                                <label className="form-label" htmlFor="newPassword">New Password</label>
                                 <div style={{ position: 'relative' }}>
                                     <FiLock style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                                     <input
+                                        id="newPassword"
+                                        name="newPassword"
                                         className="form-control"
                                         type={showPassword ? 'text' : 'password'}
                                         style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
@@ -146,10 +150,12 @@ export default function ProfilePage() {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Confirm New Password</label>
+                                <label className="form-label" htmlFor="confirmPassword">Confirm New Password</label>
                                 <div style={{ position: 'relative' }}>
                                     <FiLock style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                                     <input
+                                        id="confirmPassword"
+                                        name="confirmPassword"
                                         className="form-control"
                                         type={showPassword ? 'text' : 'password'}
                                         style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}

@@ -50,6 +50,8 @@ export default function LoginPage() {
                             <FiMail style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                             <input
                                 type="email"
+                                id="email"
+                                name="email"
                                 className="form-control"
                                 style={{ paddingLeft: '2.5rem' }}
                                 placeholder="email@example.com"
@@ -62,13 +64,15 @@ export default function LoginPage() {
 
                     <div className="form-group">
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <label className="form-label">Password</label>
+                            <label className="form-label" htmlFor="password">Password</label>
                             <Link to="/forgot-password" style={{ fontSize: '0.75rem', color: 'var(--accent-secondary)' }}>Forgot?</Link>
                         </div>
                         <div style={{ position: 'relative' }}>
                             <FiLock style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                             <input
                                 type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                name="password"
                                 className="form-control"
                                 style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
                                 placeholder="••••••••"

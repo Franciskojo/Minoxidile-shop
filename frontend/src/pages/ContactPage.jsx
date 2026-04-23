@@ -73,8 +73,10 @@ export default function ContactPage() {
                         <form onSubmit={handleSubmit}>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }} className="form-row">
                                 <div className="form-group" style={{ marginBottom: 0 }}>
-                                    <label className="form-label">Your Name</label>
+                                    <label className="form-label" htmlFor="name">Your Name</label>
                                     <input
+                                        id="name"
+                                        name="name"
                                         className="form-control"
                                         placeholder="John Doe"
                                         required
@@ -83,9 +85,11 @@ export default function ContactPage() {
                                     />
                                 </div>
                                 <div className="form-group" style={{ marginBottom: 0 }}>
-                                    <label className="form-label">Email Address</label>
+                                    <label className="form-label" htmlFor="email">Email Address</label>
                                     <input
                                         type="email"
+                                        id="email"
+                                        name="email"
                                         className="form-control"
                                         placeholder="john@example.com"
                                         required
@@ -95,8 +99,10 @@ export default function ContactPage() {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Subject</label>
+                                <label className="form-label" htmlFor="subject">Subject</label>
                                 <input
+                                    id="subject"
+                                    name="subject"
                                     className="form-control"
                                     placeholder="How can we help?"
                                     required
@@ -105,8 +111,10 @@ export default function ContactPage() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Message</label>
+                                <label className="form-label" htmlFor="message">Message</label>
                                 <textarea
+                                    id="message"
+                                    name="message"
                                     className="form-control"
                                     rows={6}
                                     placeholder="Tell us more about your inquiry..."
