@@ -278,8 +278,8 @@ export const createStripeSession = asyncHandler(async (req, res) => {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${process.env.SUCCESS_URL || 'http://localhost:5173/order'}/${order._id}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: process.env.CANCEL_URL || 'http://localhost:5173/cart',
+        success_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/order/${order._id}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/cart`,
         customer_email: req.user.email,
         metadata: { orderId: order._id.toString() },
     });
