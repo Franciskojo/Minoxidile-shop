@@ -32,6 +32,29 @@ import chatSocket from './utils/chatSocket.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Environment variables validation
+const validateEnv = () => {
+    const warnings = [];
+    if (process.env.NODE_ENV !== 'production') warnings.push('Running in development mode');
+    if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('placeholder') || process.env.JWT_SECRET.includes('minoxidile_jwt')) {
+        warnings.push('JWT_SECRET is missing or using a weak/placeholder value');
+    }
+    if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('placeholder')) {
+        warnings.push('STRIPE_SECRET_KEY is a placeholder (payments will fail)');
+    }
+    if (!process.env.CLOUDINARY_API_SECRET || process.env.CLOUDINARY_API_SECRET.includes('your_')) {
+        warnings.push('Cloudinary config is missing or using placeholders (image uploads will fail)');
+    }
+
+    if (warnings.length > 0) {
+        console.warn('\n⚠️  Environment Warnings:'.yellow.bold);
+        warnings.forEach(w => console.warn(`   - ${w}`.yellow));
+        console.warn('');
+    }
+};
+
+validateEnv();
+
 // Connect to MongoDB
 connectDB();
 

@@ -7,8 +7,10 @@ dotenv.config();
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGO_URI;
-    console.log('--- Database Connection Debug ---'.bgYellow.black);
-    console.log(`Loading URI: ${mongoURI ? 'FOUND (starts with ' + mongoURI.substring(0, 15) + '...)' : 'MISSING'}`.yellow);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('--- Database Connection Debug ---'.bgYellow.black);
+      console.log(`Loading URI: ${mongoURI ? 'FOUND (starts with ' + mongoURI.substring(0, 15) + '...)' : 'MISSING'}`.yellow);
+    }
 
     if (!mongoURI) {
       throw new Error('MONGO_URI is not defined in environment variables. Check your .env file.');

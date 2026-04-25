@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import heroImg from '../assets/hero.png';
+import heroImg from '../assets/hero.webp';
 import { useGetFeaturedProductsQuery, useGetTopRatedQuery } from '../store/slices/productsApiSlice.js';
 import { useGetCategoriesQuery } from '../store/slices/categoriesApiSlice.js';
 import ProductCard from '../components/ProductCard.jsx';

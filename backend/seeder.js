@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import crypto from 'crypto';
 import User from './models/userModel.js';
 import Product from './models/productModel.js';
 import Category from './models/categoryModel.js';
 import connectDB from './config/db.js';
 
 dotenv.config();
+
+const SEED_PASSWORD = process.env.ADMIN_SEED_PASSWORD || crypto.randomBytes(12).toString('base64url');
 
 await connectDB();
 
@@ -28,7 +31,7 @@ const importData = async () => {
         const adminUser = await User.create({
             name: 'Admin User',
             email: 'admin@example.com',
-            password: 'password123',
+            password: SEED_PASSWORD,
             role: 'admin',
         });
 
@@ -36,9 +39,12 @@ const importData = async () => {
         const vendorUser = await User.create({
             name: 'Premium Beard Co.',
             email: 'vendor@example.com',
-            password: 'password123',
+            password: SEED_PASSWORD,
             role: 'vendor',
         });
+
+        console.log(`\n🔑 Seeded accounts use password from ADMIN_SEED_PASSWORD env var.`.yellow);
+        console.log(`   admin@example.com / vendor@example.com`.yellow);
 
         // Create Sample Products
         const products = [

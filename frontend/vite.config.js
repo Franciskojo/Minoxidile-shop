@@ -20,4 +20,25 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          // Redux / RTK
+          'vendor-redux': ['@reduxjs/toolkit', 'react-redux'],
+          // UI libraries
+          'vendor-ui': ['react-hot-toast', 'react-icons', '@headlessui/react'],
+          // Data viz
+          'vendor-charts': ['recharts'],
+          // Networking
+          // 'vendor-axios': ['axios'], // axios is used via RTK Query internally - skip
+          // Socket
+          'vendor-socket': ['socket.io-client'],
+        },
+      },
+    },
+  },
 });

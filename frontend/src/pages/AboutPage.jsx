@@ -29,7 +29,7 @@ export default function AboutPage() {
                 <div style={{
                     position: 'absolute',
                     inset: 0,
-                    backgroundImage: 'url(/about-hero.png)',
+                    backgroundImage: 'url(/about-hero.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: 'brightness(0.5)'
