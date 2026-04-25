@@ -14,7 +14,7 @@ export default function AdminDashboard() {
     const { stats, recentOrders, salesChart, topProducts, ordersByStatus } = data || {};
 
     const statCards = [
-        { label: 'Total Revenue', value: `$${stats?.totalRevenue.toFixed(2)}`, icon: FiDollarSign, color: 'var(--success)' },
+        { label: 'Total Revenue', value: `₵${stats?.totalRevenue.toFixed(2)}`, icon: FiDollarSign, color: 'var(--success)' },
         { label: 'Total Orders', value: stats?.totalOrders, icon: FiShoppingBag, color: 'var(--accent-secondary)' },
         { label: 'Total Customers', value: stats?.totalUsers, icon: FiUsers, color: 'var(--info)' },
         { label: 'Pending Orders', value: stats?.pendingOrders, icon: FiClock, color: 'var(--warning)' },
@@ -63,7 +63,7 @@ export default function AdminDashboard() {
                             <LineChart data={salesChart}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
                                 <XAxis dataKey="_id" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `$${val}`} />
+                                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `₵${val}`} />
                                 <Tooltip
                                     contentStyle={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}
                                     itemStyle={{ color: 'var(--accent-secondary)' }}
@@ -126,7 +126,7 @@ export default function AdminDashboard() {
                                     <tr key={order._id}>
                                         <td style={{ fontWeight: 600 }}>{order.orderNumber}</td>
                                         <td>{order.user?.name}</td>
-                                        <td style={{ fontWeight: 700 }}>${order.totalPrice.toFixed(2)}</td>
+                                        <td style={{ fontWeight: 700 }}>₵{order.totalPrice.toFixed(2)}</td>
                                         <td><span className={`status-badge status-${order.status}`}>{order.status}</span></td>
                                     </tr>
                                 ))}
@@ -149,7 +149,7 @@ export default function AdminDashboard() {
                                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{p.totalSold} units sold</div>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
-                                    <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--accent-secondary)' }}>${p.revenue.toFixed(2)}</div>
+                                    <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--accent-secondary)' }}>₵{p.revenue.toFixed(2)}</div>
                                     <div style={{ fontSize: '0.7rem', color: 'var(--success)' }}>Revenue</div>
                                 </div>
                             </div>

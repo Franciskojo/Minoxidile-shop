@@ -9,7 +9,7 @@ import Meta from '../components/Meta.jsx';
 import { FiArrowRight, FiShield, FiTruck, FiRefreshCw, FiHeadphones } from 'react-icons/fi';
 
 const FEATURES = [
-    { icon: FiTruck, title: 'Free Shipping', desc: 'On orders over $100' },
+    { icon: FiTruck, title: 'Free Shipping', desc: 'On orders over ₵100' },
     { icon: FiShield, title: 'Secure Payments', desc: '256-bit SSL encryption' },
     { icon: FiRefreshCw, title: 'Easy Returns', desc: '30-day hassle-free returns' },
     { icon: FiHeadphones, title: '24/7 Support', desc: 'Round-the-clock assistance' },

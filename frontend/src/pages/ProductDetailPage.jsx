@@ -169,12 +169,12 @@ export default function ProductDetailPage() {
                         {/* Price */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                             <span style={{ fontSize: '2rem', fontWeight: 800, color: product.onSale ? 'var(--accent-secondary)' : 'var(--text-primary)' }}>
-                                ${effectivePrice.toFixed(2)}
+                                ₵{effectivePrice.toFixed(2)}
                             </span>
                             {product.salePrice > 0 && product.salePrice < product.price && (
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                     <span style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
-                                        ${product.price.toFixed(2)}
+                                        ₵{product.price.toFixed(2)}
                                     </span>
                                     <span className="badge badge-danger">-{Math.round(((product.price - product.salePrice) / product.price) * 100)}%</span>
                                 </div>

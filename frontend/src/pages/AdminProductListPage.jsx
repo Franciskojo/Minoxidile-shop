@@ -81,10 +81,10 @@ export default function AdminProductListPage() {
                                     </span>
                                 </td>
                                 <td>
-                                    <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>${product.price.toFixed(2)}</div>
+                                    <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₵{product.price.toFixed(2)}</div>
                                     {product.onSale && (
                                         <div style={{ fontSize: '0.75rem', color: 'var(--danger)', textDecoration: 'line-through' }}>
-                                            ${product.price.toFixed(2)}
+                                            ₵{product.price.toFixed(2)}
                                         </div>
                                     )}
                                 </td>

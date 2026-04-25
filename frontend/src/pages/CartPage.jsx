@@ -77,10 +77,10 @@ export default function CartPage() {
                                 <div className="cart-item-info" style={{ flex: 1 }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', gap: '1rem' }}>
                                         <Link to={`/product/${item.product?.slug}`} style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '1rem' }}>{item.name}</Link>
-                                        <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>${(item.price * item.qty).toFixed(2)}</span>
+                                        <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₵{(item.price * item.qty).toFixed(2)}</span>
                                     </div>
                                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-                                        Unit Price: ${item.price.toFixed(2)}
+                                        Unit Price: ₵{item.price.toFixed(2)}
                                     </div>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <div className="qty-picker" style={{ display: 'flex', alignItems: 'center', gap: '0', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-full)', overflow: 'hidden' }}>
@@ -107,20 +107,20 @@ export default function CartPage() {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
                                 <span>Subtotal</span>
-                                <span>${cart.subTotal?.toFixed(2)}</span>
+                                <span>₵{cart.subTotal?.toFixed(2)}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
                                 <span>Estimated Shipping</span>
-                                <span>{cart.subTotal >= 100 ? 'FREE' : '$9.99'}</span>
+                                <span>{cart.subTotal >= 100 ? 'FREE' : '₵9.99'}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
                                 <span>Estimated Tax (8%)</span>
-                                <span>${(cart.subTotal * 0.08).toFixed(2)}</span>
+                                <span>₵{(cart.subTotal * 0.08).toFixed(2)}</span>
                             </div>
                             <hr className="divider" />
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                                 <span>Total</span>
-                                <span>${(cart.subTotal * 1.08 + (cart.subTotal >= 100 ? 0 : 9.99)).toFixed(2)}</span>
+                                <span>₵{(cart.subTotal * 1.08 + (cart.subTotal >= 100 ? 0 : 9.99)).toFixed(2)}</span>
                             </div>
                             <Link to="/checkout" style={{ marginTop: '1rem' }}>
                                 <button className="btn btn-primary btn-block btn-lg checkout-btn">

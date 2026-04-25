@@ -190,14 +190,14 @@ export default function AdminProductEditPage() {
                         <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem' }}>Pricing & Inventory</h3>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                             <div className="form-group">
-                                <label className="form-label">Regular Price ($)</label>
+                                <label className="form-label">Regular Price (₵)</label>
                                 <input
                                     type="number" step="0.01" className="form-control" name="price"
                                     value={formData.price} onChange={handleChange} placeholder="0.00" required
                                 />
                             </div>
                             <div className="form-group">
-                                <label className="form-label">Sale Price ($) - Optional</label>
+                                <label className="form-label">Sale Price (₵) - Optional</label>
                                 <input
                                     type="number" step="0.01" className="form-control" name="salePrice"
                                     value={formData.salePrice} onChange={handleChange} placeholder="Leave empty if no sale"

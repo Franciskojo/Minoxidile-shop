@@ -93,7 +93,7 @@ export default function AdminOrderListPage() {
                                         <div style={{ fontWeight: 600 }}>{order.user?.name || 'Guest'}</div>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{order.user?.email}</div>
                                     </td>
-                                    <td style={{ fontWeight: 700 }}>${order.totalPrice.toFixed(2)}</td>
+                                    <td style={{ fontWeight: 700 }}>₵{order.totalPrice.toFixed(2)}</td>
                                     <td>
                                         {order.isPaid ? (
                                             <span className="badge badge-success">Paid</span>

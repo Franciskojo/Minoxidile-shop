@@ -123,11 +123,11 @@ export default function ProductCard({ product }) {
                     {/* Price */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
                         <span style={{ fontWeight: 700, fontSize: '1rem', color: discountPct > 0 ? 'var(--accent-secondary)' : 'var(--text-primary)' }}>
-                            ${effectivePrice.toFixed(2)}
+                            ₵{effectivePrice.toFixed(2)}
                         </span>
                         {discountPct > 0 && (
                             <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'line-through' }}>
-                                ${product.price.toFixed(2)}
+                                ₵{product.price.toFixed(2)}
                             </span>
                         )}
                     </div>

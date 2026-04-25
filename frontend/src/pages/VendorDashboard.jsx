@@ -13,7 +13,7 @@ export default function VendorDashboard() {
     const { stats } = data || {};
 
     const statCards = [
-        { label: 'Vendor Revenue', value: `$${stats?.totalRevenue.toFixed(2)}`, icon: FiDollarSign, color: 'var(--success)' },
+        { label: 'Vendor Revenue', value: `₵${stats?.totalRevenue.toFixed(2)}`, icon: FiDollarSign, color: 'var(--success)' },
         { label: 'Units Sold', value: stats?.totalOrders, icon: FiShoppingBag, color: 'var(--accent-secondary)' },
         { label: 'Total Products', value: stats?.totalProducts, icon: FiPackage, color: 'var(--info)' },
         { label: 'Conversion', value: '3.2%', icon: FiTrendingUp, color: 'var(--warning)' },

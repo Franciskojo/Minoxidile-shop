@@ -6,15 +6,23 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         register: builder.mutation({
             query: (data) => ({ url: '/auth/register', method: 'POST', body: data }),
             async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
-                const { data } = await queryFulfilled;
-                dispatch(setCredentials({ user: data.user, accessToken: data.accessToken }));
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setCredentials({ user: data.user, accessToken: data.accessToken }));
+                } catch (err) {
+                    // Do nothing here, the component handles the error UI
+                }
             },
         }),
         login: builder.mutation({
             query: (data) => ({ url: '/auth/login', method: 'POST', body: data }),
             async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
-                const { data } = await queryFulfilled;
-                dispatch(setCredentials({ user: data.user, accessToken: data.accessToken }));
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setCredentials({ user: data.user, accessToken: data.accessToken }));
+                } catch (err) {
+                    // Do nothing here, the component handles the error UI
+                }
             },
         }),
         logoutUser: builder.mutation({

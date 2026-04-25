@@ -82,9 +82,9 @@ export default function VendorProductsPage() {
                                         <span className="badge badge-info">{product.category?.name || 'N/A'}</span>
                                     </td>
                                     <td>
-                                        <div style={{ fontWeight: 800, color: 'var(--text-primary)' }}>${product.price.toFixed(2)}</div>
+                                        <div style={{ fontWeight: 800, color: 'var(--text-primary)' }}>₵{product.price.toFixed(2)}</div>
                                         {product.salePrice > 0 && (
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--accent-secondary)' }}>Sale: ${product.salePrice.toFixed(2)}</div>
+                                            <div style={{ fontSize: '0.75rem', color: 'var(--accent-secondary)' }}>Sale: ₵{product.salePrice.toFixed(2)}</div>
                                         )}
                                     </td>
                                     <td>

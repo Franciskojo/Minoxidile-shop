@@ -144,7 +144,7 @@ export default function CheckoutPage() {
                                             <div className="truncate" style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{item.name}</div>
                                             <div style={{ color: 'var(--text-muted)' }}>Qty: {item.qty}</div>
                                         </div>
-                                        <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>${(item.price * item.qty).toFixed(2)}</div>
+                                        <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>₵{(item.price * item.qty).toFixed(2)}</div>
                                     </div>
                                 ))}
                             </div>
@@ -152,20 +152,20 @@ export default function CheckoutPage() {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.875rem' }}>
                                 <div className="justify-between flex">
                                     <span className="text-secondary">Subtotal</span>
-                                    <span className="text-primary">${subtotal.toFixed(2)}</span>
+                                    <span className="text-primary">₵{subtotal.toFixed(2)}</span>
                                 </div>
                                 <div className="justify-between flex">
                                     <span className="text-secondary">Shipping</span>
-                                    <span className="text-primary">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                                    <span className="text-primary">{shipping === 0 ? 'FREE' : `₵${shipping.toFixed(2)}`}</span>
                                 </div>
                                 <div className="justify-between flex">
                                     <span className="text-secondary">Tax (8%)</span>
-                                    <span className="text-primary">${tax.toFixed(2)}</span>
+                                    <span className="text-primary">₵{tax.toFixed(2)}</span>
                                 </div>
                                 <hr className="divider" />
                                 <div className="justify-between flex" style={{ fontSize: '1.1rem', fontWeight: 800 }}>
                                     <span className="text-primary">Total</span>
-                                    <span className="text-accent">${total.toFixed(2)}</span>
+                                    <span className="text-accent">₵{total.toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>

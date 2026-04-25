@@ -127,9 +127,9 @@ export default function OrderDetailsPage() {
                                         </div>
                                         <div style={{ flex: 1 }}>
                                             <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem' }}>{item.name}</div>
-                                            <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>${item.price.toFixed(2)} x {item.qty}</div>
+                                            <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>₵{item.price.toFixed(2)} x {item.qty}</div>
                                         </div>
-                                        <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>${(item.price * item.qty).toFixed(2)}</div>
+                                        <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₵{(item.price * item.qty).toFixed(2)}</div>
                                     </div>
                                 ))}
                             </div>
@@ -174,26 +174,26 @@ export default function OrderDetailsPage() {
                             <div className="flex flex-col gap-3" style={{ fontSize: '0.875rem' }}>
                                 <div className="justify-between flex">
                                     <span className="text-secondary">Items Subtotal</span>
-                                    <span className="text-primary">${order.itemsPrice.toFixed(2)}</span>
+                                    <span className="text-primary">₵{order.itemsPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="justify-between flex">
                                     <span className="text-secondary">Shipping</span>
-                                    <span className="text-primary">${order.shippingPrice.toFixed(2)}</span>
+                                    <span className="text-primary">₵{order.shippingPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="justify-between flex">
                                     <span className="text-secondary">Tax</span>
-                                    <span className="text-primary">${order.taxPrice.toFixed(2)}</span>
+                                    <span className="text-primary">₵{order.taxPrice.toFixed(2)}</span>
                                 </div>
                                 {order.discountAmount > 0 && (
                                     <div className="justify-between flex text-success">
                                         <span>Discount</span>
-                                        <span>-${order.discountAmount.toFixed(2)}</span>
+                                        <span>-₵{order.discountAmount.toFixed(2)}</span>
                                     </div>
                                 )}
                                 <hr className="divider" />
                                 <div className="justify-between flex" style={{ fontSize: '1.1rem', fontWeight: 800 }}>
                                     <span className="text-primary">Total Paid</span>
-                                    <span className="text-accent">${order.totalPrice.toFixed(2)}</span>
+                                    <span className="text-accent">₵{order.totalPrice.toFixed(2)}</span>
                                 </div>
                             </div>
 

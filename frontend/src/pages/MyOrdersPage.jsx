@@ -48,7 +48,7 @@ export default function MyOrdersPage() {
                                             <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{order.orderNumber}</td>
                                             <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                                             <td>{order.items.length} item(s)</td>
-                                            <td style={{ fontWeight: 700, color: 'var(--text-primary)' }}>${order.totalPrice.toFixed(2)}</td>
+                                            <td style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₵{order.totalPrice.toFixed(2)}</td>
                                             <td>
                                                 <span className={`status-badge status-${order.status}`}>
                                                     {order.status}
@@ -87,7 +87,7 @@ export default function MyOrdersPage() {
                                         </div>
                                         <div>
                                             <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>Total</div>
-                                            <div style={{ fontWeight: 700, color: 'var(--accent-secondary)' }}>${order.totalPrice.toFixed(2)}</div>
+                                            <div style={{ fontWeight: 700, color: 'var(--accent-secondary)' }}>₵{order.totalPrice.toFixed(2)}</div>
                                         </div>
                                     </div>
                                     <Link to={`/order/${order._id}`}>

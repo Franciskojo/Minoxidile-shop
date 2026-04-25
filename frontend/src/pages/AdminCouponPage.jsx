@@ -148,10 +148,10 @@ export default function AdminCouponPage() {
                                     </td>
                                     <td>
                                         <span style={{ fontWeight: 700 }}>
-                                            {coupon.discountType === 'percentage' ? `${coupon.discountValue}%` : `$${coupon.discountValue}`}
+                                            {coupon.discountType === 'percentage' ? `${coupon.discountValue}%` : `₵${coupon.discountValue}`}
                                         </span>
                                     </td>
-                                    <td>{coupon.minPurchase ? `$${coupon.minPurchase}` : 'None'}</td>
+                                    <td>{coupon.minPurchase ? `₵${coupon.minPurchase}` : 'None'}</td>
                                     <td>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}>
                                             <FiCalendar size={14} />
@@ -204,7 +204,7 @@ export default function AdminCouponPage() {
                                     <label className="form-label">Discount Type</label>
                                     <select className="form-control" name="discountType" value={formData.discountType} onChange={handleChange}>
                                         <option value="percentage">Percentage (%)</option>
-                                        <option value="fixed">Fixed Amount ($)</option>
+                                        <option value="fixed">Fixed Amount (₵)</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
@@ -214,7 +214,7 @@ export default function AdminCouponPage() {
                             </div>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                                 <div className="form-group">
-                                    <label className="form-label">Min Purchase ($)</label>
+                                    <label className="form-label">Min Purchase (₵)</label>
                                     <input type="number" className="form-control" name="minPurchase" value={formData.minPurchase} onChange={handleChange} />
                                 </div>
                                 <div className="form-group">

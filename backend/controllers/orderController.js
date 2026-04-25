@@ -229,7 +229,7 @@ export const createStripeSession = asyncHandler(async (req, res) => {
 
     const lineItems = order.items.map((item) => ({
         price_data: {
-            currency: 'usd',
+            currency: 'ghs',
             product_data: {
                 name: item.name,
                 images: [item.image],
@@ -243,7 +243,7 @@ export const createStripeSession = asyncHandler(async (req, res) => {
     if (order.taxPrice > 0) {
         lineItems.push({
             price_data: {
-                currency: 'usd',
+                currency: 'ghs',
                 product_data: { name: 'Tax (8%)' },
                 unit_amount: Math.round(order.taxPrice * 100),
             },
@@ -254,7 +254,7 @@ export const createStripeSession = asyncHandler(async (req, res) => {
     if (order.shippingPrice > 0) {
         lineItems.push({
             price_data: {
-                currency: 'usd',
+                currency: 'ghs',
                 product_data: { name: 'Shipping Fee' },
                 unit_amount: Math.round(order.shippingPrice * 100),
             },
@@ -266,7 +266,7 @@ export const createStripeSession = asyncHandler(async (req, res) => {
     if (order.discountAmount > 0) {
         lineItems.push({
             price_data: {
-                currency: 'usd',
+                currency: 'ghs',
                 product_data: { name: 'Discount Applied' },
                 unit_amount: -Math.round(order.discountAmount * 100),
             },

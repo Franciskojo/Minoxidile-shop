@@ -60,7 +60,7 @@ export default function VendorOrdersPage() {
                                     </td>
                                     <td>
                                         <div style={{ fontWeight: 800, color: 'var(--success)' }}>
-                                            ${order.vendorSubtotal.toFixed(2)}
+                                            ₵{order.vendorSubtotal.toFixed(2)}
                                         </div>
                                     </td>
                                     <td>
