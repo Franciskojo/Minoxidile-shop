@@ -39,6 +39,9 @@ const validateEnv = () => {
     if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('placeholder') || process.env.JWT_SECRET.includes('minoxidile_jwt')) {
         warnings.push('JWT_SECRET is missing or using a weak/placeholder value');
     }
+    if (!process.env.JWT_REFRESH_SECRET || process.env.JWT_REFRESH_SECRET.length < 64) {
+        warnings.push('JWT_REFRESH_SECRET is missing or too short (must be >= 64 chars / 32 bytes). Generate with: node -e "console.log(require(\'crypto\').randomBytes(64).toString(\'hex\'))"');
+    }
     if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('placeholder')) {
         warnings.push('STRIPE_SECRET_KEY is a placeholder (payments will fail)');
     }

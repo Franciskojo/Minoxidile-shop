@@ -15,6 +15,11 @@ const generateTokens = (id) => {
     return { accessToken, refreshToken };
 };
 
+// SHA-256 hash a token before storing in DB.
+// This means a database breach cannot be used to forge sessions directly.
+const hashToken = (token) =>
+    crypto.createHash('sha256').update(token).digest('hex');
+
 // Set cookie options
 const cookieOptions = {
     httpOnly: true,
@@ -42,8 +47,8 @@ export const register = asyncHandler(async (req, res) => {
     const user = await User.create({ name, email, password });
     const { accessToken, refreshToken } = generateTokens(user._id);
 
-    // Save refresh token
-    user.refreshToken = refreshToken;
+    // Save hashed refresh token — never store the raw JWT in the DB
+    user.refreshTokenHash = hashToken(refreshToken);
     await user.save({ validateBeforeSave: false });
 
     // Send welcome email (non-blocking)
@@ -78,7 +83,7 @@ export const login = asyncHandler(async (req, res) => {
         throw new Error('Please provide email and password');
     }
 
-    const user = await User.findOne({ email }).select('+password +refreshToken');
+    const user = await User.findOne({ email }).select('+password +refreshTokenHash');
 
     if (!user || !(await user.matchPassword(password))) {
         res.status(401);
@@ -92,7 +97,8 @@ export const login = asyncHandler(async (req, res) => {
 
     const { accessToken, refreshToken } = generateTokens(user._id);
 
-    user.refreshToken = refreshToken;
+    // Save hashed refresh token — never store the raw JWT in the DB
+    user.refreshTokenHash = hashToken(refreshToken);
     await user.save({ validateBeforeSave: false });
 
     res
@@ -116,9 +122,9 @@ export const login = asyncHandler(async (req, res) => {
 // @route   POST /api/auth/logout
 // @access  Public
 export const logout = asyncHandler(async (req, res) => {
-    // If we have a user from protect middleware, clear their refresh token
+    // Clear the stored token hash so the refresh token cannot be reused after logout
     if (req.user?._id) {
-        await User.findByIdAndUpdate(req.user._id, { refreshToken: '' });
+        await User.findByIdAndUpdate(req.user._id, { refreshTokenHash: '' });
     }
 
     res
@@ -146,16 +152,54 @@ export const refreshToken = asyncHandler(async (req, res) => {
         throw new Error('No refresh token');
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
-    const user = await User.findById(decoded.id).select('+refreshToken');
+    // Verify the JWT signature first
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+    } catch {
+        res.status(401);
+        throw new Error('Invalid or expired refresh token');
+    }
 
-    if (!user || user.refreshToken !== token) {
+    const user = await User.findById(decoded.id).select('+refreshTokenHash');
+
+    if (!user) {
+        res.status(401);
+        throw new Error('User not found');
+    }
+
+    const incomingHash = hashToken(token);
+
+    // Reuse detection: if the DB hash is empty, this token was already rotated.
+    // This means a stolen token is being replayed — invalidate the entire session.
+    if (!user.refreshTokenHash) {
+        // Potential token theft detected — wipe all sessions for this user
+        console.warn(`[AUTH] Refresh token reuse detected for user ${user._id} — session invalidated.`);
+        res.clearCookie('accessToken', cookieOptions).clearCookie('refreshToken', cookieOptions);
+        res.status(401);
+        throw new Error('Token reuse detected. Please log in again.');
+    }
+
+    // Constant-time comparison to prevent timing attacks
+    const expectedHash = Buffer.from(user.refreshTokenHash);
+    const actualHash = Buffer.from(incomingHash);
+    if (
+        expectedHash.length !== actualHash.length ||
+        !crypto.timingSafeEqual(expectedHash, actualHash)
+    ) {
+        // Hash mismatch — clear the stored hash so further attempts also fail
+        user.refreshTokenHash = '';
+        await user.save({ validateBeforeSave: false });
         res.status(401);
         throw new Error('Invalid refresh token');
     }
 
+    // Issue new token pair (rotation)
     const { accessToken, refreshToken: newRefresh } = generateTokens(user._id);
-    user.refreshToken = newRefresh;
+
+    // Clear the old hash immediately before saving the new one
+    // so concurrent reuse of the old token fails at the reuse-detection check above
+    user.refreshTokenHash = hashToken(newRefresh);
     await user.save({ validateBeforeSave: false });
 
     res
@@ -219,15 +263,17 @@ export const resetPassword = asyncHandler(async (req, res) => {
         throw new Error('Invalid or expired token');
     }
 
-    // Set new password
+    // Set new password and invalidate all existing refresh tokens
+    // so any stolen session cannot survive a password reset
     user.password = req.body.password;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
+    user.refreshTokenHash = '';
 
     await user.save();
 
     res.status(200).json({
         success: true,
-        message: 'Password reset successful',
+        message: 'Password reset successful. Please log in again.',
     });
 });

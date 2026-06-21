@@ -18,6 +18,21 @@ export const getConversations = asyncHandler(async (req, res) => {
 // @route   GET /api/chat/messages/:conversationId
 // @access  Private
 export const getMessages = asyncHandler(async (req, res) => {
+    const conversation = await Conversation.findById(req.params.conversationId);
+    if (!conversation) {
+        res.status(404);
+        throw new Error('Conversation not found');
+    }
+
+    // Verify user is a participant of the conversation
+    const isParticipant = conversation.participants.some(
+        (p) => p.toString() === req.user._id.toString()
+    );
+    if (!isParticipant) {
+        res.status(403);
+        throw new Error('Not authorized to access this conversation');
+    }
+
     const messages = await Message.find({
         conversation: req.params.conversationId
     })

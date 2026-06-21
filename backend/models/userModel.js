@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema(
         storeDescription: { type: String, default: '' },
         businessEmail: { type: String, default: '' },
         businessPhone: { type: String, default: '' },
-        refreshToken: { type: String, select: false },
+        refreshTokenHash: { type: String, select: false },
         resetPasswordToken: String,
         resetPasswordExpire: Date,
     },

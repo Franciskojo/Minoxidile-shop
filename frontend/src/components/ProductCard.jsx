@@ -9,7 +9,7 @@ import Rating from './Rating.jsx';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, hidePrice = false, hideAddToCart = false }) {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -121,25 +121,29 @@ export default function ProductCard({ product }) {
                         </div>
                     )}
                     {/* Price */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
-                        <span style={{ fontWeight: 700, fontSize: '1rem', color: discountPct > 0 ? 'var(--accent-secondary)' : 'var(--text-primary)' }}>
-                            ₵{effectivePrice.toFixed(2)}
-                        </span>
-                        {discountPct > 0 && (
-                            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'line-through' }}>
-                                ₵{product.price.toFixed(2)}
+                    {!hidePrice && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+                            <span style={{ fontWeight: 700, fontSize: '1rem', color: discountPct > 0 ? 'var(--accent-secondary)' : 'var(--text-primary)' }}>
+                                ₵{effectivePrice.toFixed(2)}
                             </span>
-                        )}
-                    </div>
+                            {discountPct > 0 && (
+                                <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'line-through' }}>
+                                    ₵{product.price.toFixed(2)}
+                                </span>
+                            )}
+                        </div>
+                    )}
                     {/* Add to cart */}
-                    <button
-                        onClick={handleAddToCart}
-                        disabled={product.stock === 0 || addingToCart}
-                        className="btn btn-primary btn-sm btn-block"
-                    >
-                        <FiShoppingCart size={14} />
-                        {product.stock === 0 ? 'Out of Stock' : addingToCart ? 'Adding…' : 'Add to Cart'}
-                    </button>
+                    {!hideAddToCart && (
+                        <button
+                            onClick={handleAddToCart}
+                            disabled={product.stock === 0 || addingToCart}
+                            className="btn btn-primary btn-sm btn-block"
+                        >
+                            <FiShoppingCart size={14} />
+                            {product.stock === 0 ? 'Out of Stock' : addingToCart ? 'Adding…' : 'Add to Cart'}
+                        </button>
+                    )}
                 </div>
             </div>
         </Link>

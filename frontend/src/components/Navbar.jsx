@@ -52,6 +52,11 @@ export default function Navbar() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+    // Close mobile menu on page/route transition
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [location]);
+
     const handleSearch = (e) => {
         e.preventDefault();
         // Handled by debounced search
@@ -79,9 +84,18 @@ export default function Navbar() {
             borderBottom: `1px solid ${scrolled ? 'var(--border-color)' : 'transparent'}`,
             transition: 'all 0.3s ease',
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: 'column',
         }}>
-            <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', width: '100%' }}>
+            {/* Promo Bar */}
+            <div className="promo-bar">
+                <div className="promo-track">
+                    <span className="promo-item">🎉 FREE SHIPPING ON ORDERS OVER ₵100 | USE CODE <strong>GROW10</strong> FOR 10% OFF</span>
+                    <span className="promo-item">🎉 FREE SHIPPING ON ORDERS OVER ₵100 | USE CODE <strong>GROW10</strong> FOR 10% OFF</span>
+                    <span className="promo-item">🎉 FREE SHIPPING ON ORDERS OVER ₵100 | USE CODE <strong>GROW10</strong> FOR 10% OFF</span>
+                </div>
+            </div>
+
+            <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', width: '100%', height: '70px' }}>
                 {/* Mobile menu btn */}
                 <button
                     onClick={() => {
@@ -130,7 +144,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Search bar */}
-                <form onSubmit={handleSearch} style={{ flex: 1, maxWidth: 400 }}>
+                <form onSubmit={handleSearch} className="nav-search-desktop" style={{ flex: 1, maxWidth: 400 }}>
                     <div style={{ position: 'relative' }}>
                         <FiSearch style={{
                             position: 'absolute', left: '0.85rem', top: '50%',
@@ -281,7 +295,7 @@ export default function Navbar() {
                             )}
                         </div>
                     ) : (
-                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <div style={{ display: 'flex', gap: '0.5rem' }} className="nav-auth-desktop">
                             <Link to="/login"><button className="btn btn-secondary btn-sm">Login</button></Link>
                             <Link to="/register"><button className="btn btn-primary btn-sm">Sign Up</button></Link>
                         </div>
@@ -299,6 +313,24 @@ export default function Navbar() {
                     boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
                     display: 'flex', flexDirection: 'column', gap: '0.75rem',
                 }}>
+                    {/* Mobile Search bar */}
+                    <form onSubmit={(e) => { e.preventDefault(); setMobileMenuOpen(false); }} style={{ marginBottom: '0.5rem' }}>
+                        <div style={{ position: 'relative' }}>
+                            <FiSearch style={{
+                                position: 'absolute', left: '0.85rem', top: '50%',
+                                transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '0.9rem',
+                            }} />
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Search products…"
+                                className="form-control"
+                                style={{ paddingLeft: '2.4rem', paddingTop: '0.5rem', paddingBottom: '0.5rem', borderRadius: 'var(--radius-full)' }}
+                            />
+                        </div>
+                    </form>
+
                     {[['/', 'Home'], ['/shop', 'Shop'], ['/about', 'About'], ['/contact', 'Contact']].map(([to, label]) => (
                         <Link key={to} to={to} onClick={() => setMobileMenuOpen(false)}
                             style={{
@@ -328,10 +360,11 @@ export default function Navbar() {
         @media (max-width: 992px) {
           #mobile-menu-btn { display: flex !important; }
           .nav-links { display: none !important; }
-          .navbar form { max-width: 160px !important; }
+          .nav-search-desktop { max-width: 160px !important; }
+          .nav-auth-desktop { display: none !important; }
         }
         @media (max-width: 640px) {
-          .navbar form { display: none !important; }
+          .nav-search-desktop { display: none !important; }
         }
       `}</style>
         </nav>
